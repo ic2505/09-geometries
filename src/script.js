@@ -27,21 +27,22 @@ const geometry2 = new THREE.OctahedronGeometry(3, 6, 6, 8, 8, 8);
 const mesh2 = new THREE.Mesh(geometry2, material);
 scene.add(mesh2);
 
-//Drawing a triangle
-// vertex array, passed as Float32Array. 3 verteces with x,y,x values
-const positionsArray = new Float32Array([
-  0, 0, 0, 
-  0, 1, 0, 
-  1, 0, 0
-]);
-// 1 vertex contains 3 values
+// Drawing triangles
+const geometry4 = new THREE.BufferGeometry();
+const count = 500;
+// each triangle with 3 vertices each with 3 values, hence *3 *3
+const positionsArray = new Float32Array(count * 3 * 3);
+for (let i = 0; i < positionsArray.length; i++) {
+  if (i % 3 === 0) {
+    positionsArray[i] = (Math.random() + 1.5) * 3;
+  } else {
+    positionsArray[i] = (Math.random() - 0.5) * 3;
+  }
+}
 const positionsAttribute = new THREE.BufferAttribute(positionsArray, 3);
-const geometry3 = new THREE.BufferGeometry();
-geometry3.setAttribute("position", positionsAttribute);
-const mesh3 = new THREE.Mesh(geometry3, material);
-scene.add(mesh3);
-
-mesh3.position.x = 6;
+geometry4.setAttribute("position", positionsAttribute);
+const mesh4 = new THREE.Mesh(geometry4, material);
+scene.add(mesh4);
 
 // Sizes
 const sizes = {
